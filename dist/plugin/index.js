@@ -1,0 +1,2 @@
+"use strict";(()=>{figma.showUI(__html__,{width:1e3,height:600});function r(n){let o=n?c(n):null;figma.ui.postMessage({type:"nodes-arr",node:o})}function c(n){if("fills"in n){let o=[],e=n.fills;for(let t of e)if("color"in t&&t.type==="SOLID"){let l=Math.round(t.color.r*255),i=Math.round(t.color.g*255),s=Math.round(t.color.b*255);o.push({r:l,g:i,b:s})}return o}}figma.on("selectionchange",()=>{let n=figma.currentPage.selection,o=n.length>0?n[0]:null;o!==null&&r(o)});})();
+//# sourceMappingURL=index.js.map
