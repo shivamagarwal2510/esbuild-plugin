@@ -1,10 +1,5 @@
 figma.showUI(__html__, { width: 1000, height: 600 });
 
-function sendData(reqNode: SceneNode){
-    const node = reqNode? extractProperties(reqNode):null;
-    figma.ui.postMessage({type:'nodes-arr', node});
-}
-
 function extractProperties(node:SceneNode){
     if('fills' in node){
         const fillColorArr = [];
@@ -22,10 +17,17 @@ function extractProperties(node:SceneNode){
 }
 figma.on('selectionchange', ()=>{
     const nodes = figma.currentPage.selection;
-    // console.log(nodes);
+    console.log(nodes);
     const node = nodes.length>0?nodes[0]:null;
     // console.log(node);
-    if(node!==null){
-        sendData(node);
+    if(nodes.length>0){
+        const colorArr = [];
+        for(const node of nodes){
+            const nodeColor = extractProperties(node);
+            // console.log(nodeColor);
+            colorArr.push(nodeColor);
+        }
+        console.log(colorArr);
+        figma.ui.postMessage({type:'nodes-arr', colorArr});
     } 
 })

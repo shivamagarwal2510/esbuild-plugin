@@ -2,9 +2,11 @@ import React, {useState} from 'react';
 const App: React.FC = () => {
   const [node, setNode] = useState("Select Node");
   window.onmessage = (event) => {
-    const {type, node} = event.data.pluginMessage;
-    if (type === "nodes-arr")
-    setNode(node? JSON.stringify(node, null, 1):'Select Node');
+    const {type, colorArr} = event.data.pluginMessage;
+    if (type === "nodes-arr"){
+      console.log("Data recieved", colorArr);
+      setNode(colorArr? JSON.stringify(colorArr, null, 1):'Select Node');
+    }
   }
   return (
     <div>
